@@ -320,22 +320,20 @@ void ScrollUp(byte NewLine[])
 }
 
 
-void ScrollSide(byte NewLine[])
-{
+void ScrollSide(byte NewLine[]){
+  
   byte lineIndex;
   byte rowIndex;
 
-  for(lineIndex = 0; lineIndex < 7; lineIndex++)
-  {
-    for(rowIndex = 0; rowIndex < 8; rowIndex++)
-    {
+  for(lineIndex = 0; lineIndex < 7; lineIndex++){
+    
+    for(rowIndex = 0; rowIndex < 8; rowIndex++){
       Screen[lineIndex][rowIndex] = Screen[lineIndex][rowIndex+1];
     }
   }
 
-  for(lineIndex = 0; lineIndex < 8; lineIndex++)
-  {
-   // Screen[7][rowIndex] = NewLine[rowIndex];
+  for(lineIndex = 0; lineIndex < 8; lineIndex++){
+  //  Screen[7][rowIndex] = NewLine[rowIndex];
     Screen[lineIndex][7] = NewLine[rowIndex];
     
   }
@@ -345,7 +343,7 @@ void ScrollSide(byte NewLine[])
 void UpdateState()
 {
   State++;
-  if (State == 19)
+  if (State == 9)
   {
     State = 0;
   }
@@ -365,32 +363,37 @@ void UpdateState()
 //       Clear();
 //       StateWaitTime = 2000;
 //       break;
-     case 3:
+     case 1:
        ScrollUp(Picture[1]);
        StateWaitTime = 250;
        break;
-     case 4:
+     case 2:
        ScrollUp(Picture[2]);
        StateWaitTime = 250;
        break;
-     case 5:
+     case 3:
        ScrollUp(Picture[3]);
        StateWaitTime = 250;
        break;   
-     case 6:
+     case 4:
        ScrollUp(Picture[4]);
        StateWaitTime = 250;
        break;
-     case 7:
+     case 5:
        ScrollUp(Picture[5]);
        StateWaitTime = 250;
        break;
-     case 8:
+     case 6:
        ScrollUp(Picture[6]);
        StateWaitTime = 250;
        break;
-     case 9:
+     case 7:
        ScrollUp(Picture[7]);
+       StateWaitTime = 250;
+       break; 
+
+     case 8:
+       ScrollUp(Picture[8]);
        StateWaitTime = 250;
        break; 
        
@@ -406,7 +409,7 @@ void UpdateState()
 void UpdateState2()
 {
   State++;
-  if (State == 19)
+  if (State == 9)
   {
     State = 0;
   }
@@ -426,34 +429,76 @@ void UpdateState2()
 //       Clear();
 //       StateWaitTime = 2000;
 //       break;
-     case 3:
+     case 1:
        ScrollSide(Picture[1]);
        StateWaitTime = 250;
        break;
-     case 4:
+     case 2:
        ScrollSide(Picture[2]);
        StateWaitTime = 250;
        break;
-     case 5:
+     case 3:
        ScrollSide(Picture[3]);
        StateWaitTime = 250;
        break;   
-     case 6:
+     case 4:
        ScrollSide(Picture[4]);
        StateWaitTime = 250;
        break;
-     case 7:
+     case 5:
        ScrollSide(Picture[5]);
        StateWaitTime = 250;
        break;
-     case 8:
+     case 6:
        ScrollSide(Picture[6]);
        StateWaitTime = 250;
        break;
-     case 9:
+     case 7:
        ScrollSide(Picture[7]);
        StateWaitTime = 250;
        break; 
+
+     case 8:
+       ScrollSide(Picture[8]);
+       StateWaitTime = 250;
+       break;
+//
+//       //Scroll back
+//
+//
+//     case 9:
+//       ScrollSide(Picture[8]);
+//       StateWaitTime = 250;
+//       break;
+//     case 10:
+//       ScrollSide(Picture[7]);
+//       StateWaitTime = 250;
+//       break;
+//     case 11:
+//       ScrollSide(Picture[6]);
+//       StateWaitTime = 250;
+//       break;   
+//     case 12:
+//       ScrollSide(Picture[5]);
+//       StateWaitTime = 250;
+//       break;
+//     case 13:
+//       ScrollSide(Picture[4]);
+//       StateWaitTime = 250;
+//       break;
+//     case 14:
+//       ScrollSide(Picture[3]);
+//       StateWaitTime = 250;
+//       break;
+//     case 15:
+//       ScrollSide(Picture[2]);
+//       StateWaitTime = 250;
+//       break; 
+//
+//     case 16:
+//       ScrollSide(Picture[1]);
+//       StateWaitTime = 250;
+//       break;
        
   }
 }
@@ -575,6 +620,7 @@ void loop() {
     
 //Serial.print("Loop");
  UpdateState2();
+ 
  //BlinkingState();
 // ShowPicture();
 
