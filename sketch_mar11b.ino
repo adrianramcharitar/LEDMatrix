@@ -89,11 +89,6 @@ byte Circle4[8][8] = {{2,2,2,1,1,2,2,2},
                       {2,2,2,1,1,2,2,2}};
 
 
-                      
-
-
-
-                      
 
 unsigned long LastStateChangeTime;
 unsigned long StateWaitTime;
@@ -291,12 +286,6 @@ void ShowCircle4(){
 
 
 
-
-
-
-
-
-
 void ShowFartyFace()
 {  
   byte lineIndex;
@@ -329,6 +318,29 @@ void ScrollUp(byte NewLine[])
     Screen[7][rowIndex] = NewLine[rowIndex];
   }
 }
+
+
+void ScrollSide(byte NewLine[])
+{
+  byte lineIndex;
+  byte rowIndex;
+
+  for(lineIndex = 0; lineIndex < 7; lineIndex++)
+  {
+    for(rowIndex = 0; rowIndex < 8; rowIndex++)
+    {
+      Screen[lineIndex][rowIndex] = Screen[lineIndex][rowIndex+1];
+    }
+  }
+
+  for(lineIndex = 0; lineIndex < 8; lineIndex++)
+  {
+   // Screen[7][rowIndex] = NewLine[rowIndex];
+    Screen[lineIndex][7] = NewLine[rowIndex];
+    
+  }
+}
+
 
 void UpdateState()
 {
@@ -382,49 +394,67 @@ void UpdateState()
        StateWaitTime = 250;
        break; 
        
-//    case 10:
-//       ShowPicture();
-//       StateWaitTime = 500;
+  }
+}
+
+
+
+
+
+//Side Scroll
+
+void UpdateState2()
+{
+  State++;
+  if (State == 19)
+  {
+    State = 0;
+  }
+
+  LastStateChangeTime = millis();
+  switch (State)
+  {
+//     case 0:
+//       Screen([8]);
+//       StateWaitTime = 2000;
 //       break;
-//     case 11:
+//     case 1:
 //       Clear();
-//       StateWaitTime = 500;
+//       StateWaitTime = 250;
 //       break;
-//       
-//     case 12:
-//       ShowPicture();
-//       StateWaitTime = 500;
-//       break;
-//       
-//     case 13:
+//     case 2:
 //       Clear();
-//       StateWaitTime = 500;
-//       break;   
-//       
-//     case 14:
-//       ShowPicture();
-//       StateWaitTime = 500;
+//       StateWaitTime = 2000;
 //       break;
-//       
-//     case 15:
-//       ScrollUp(BlueBall[2]);
-//       StateWaitTime = 250;
-//       break;
-//       
-//     case 16:
-//       ScrollUp(BlueBall[1]);
-//       StateWaitTime = 250;
-//       break;
-//       
-//     case 17:
-//       ScrollUp(BlueBall[0]);
-//       StateWaitTime = 250;
-//       break; 
-     
-//     case 18:
-//       ShowPicture();
-//       StateWaitTime = 250;
-//       break; 
+     case 3:
+       ScrollSide(Picture[1]);
+       StateWaitTime = 250;
+       break;
+     case 4:
+       ScrollSide(Picture[2]);
+       StateWaitTime = 250;
+       break;
+     case 5:
+       ScrollSide(Picture[3]);
+       StateWaitTime = 250;
+       break;   
+     case 6:
+       ScrollSide(Picture[4]);
+       StateWaitTime = 250;
+       break;
+     case 7:
+       ScrollSide(Picture[5]);
+       StateWaitTime = 250;
+       break;
+     case 8:
+       ScrollSide(Picture[6]);
+       StateWaitTime = 250;
+       break;
+     case 9:
+       ScrollSide(Picture[7]);
+       StateWaitTime = 250;
+       break; 
+       
   }
 }
 
@@ -501,12 +531,6 @@ void AnimateCircle()
 
 
 
-
-
-
-
-
-
 void setup() 
 {
 
@@ -531,47 +555,6 @@ void setup()
   LastStateChangeTime = millis();
 }
 
-void flash(){
-
-Serial.print("Flash");
-Serial.println();
-
- //LastStateChangeTime = millis();
-
-//  for(int i = 0; i <= 10; i ++){
-
-  ShowPicture(); 
-  StateWaitTime = 1000; 
-  Clear(); 
-  StateWaitTime = 1000; 
-  Serial.print("Iter1");
-  ShowPicture();
-  StateWaitTime = 1000; 
-    Serial.print("Iter2");
-  Clear();
-  StateWaitTime = 1000; 
-    Serial.print("Iter3");
-  ShowPicture(); 
-  StateWaitTime = 1000; 
-    Serial.print("Iter4");
-  Clear();
-  StateWaitTime = 1000;
-    Serial.print("Iter5"); 
-  ShowPicture(); 
-  StateWaitTime = 1000; 
-  Clear();
-  StateWaitTime = 1000; 
-  ShowPicture(); 
-  StateWaitTime = 1000; 
-  Clear();
-  
-
-//  Serial.print(i);
-  Serial.println();
-//  ShowPicture();
- // }
-  
-}
 
 
 void loop() {
@@ -591,11 +574,11 @@ void loop() {
 
     
 //Serial.print("Loop");
- //   UpdateState();
+ UpdateState2();
  //BlinkingState();
- //  ShowPicture();
+// ShowPicture();
 
- AnimateCircle();
+// AnimateCircle();
 
  //ShowCircle2();
    
