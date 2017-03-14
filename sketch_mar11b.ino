@@ -52,8 +52,8 @@ byte Picture[8][8] = {{1,1,1,1,1,1,1,1},
 byte Circle1[8][8] = {{2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
+                      {2,2,2,1,1,2,2,2},
+                      {2,2,2,1,1,2,2,2},
                       {2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2}};
@@ -62,12 +62,34 @@ byte Circle1[8][8] = {{2,2,2,2,2,2,2,2},
 
 byte Circle2[8][8] = {{2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
-                      {2,2,2,2,2,2,2,2},
+                      {2,2,2,1,1,2,2,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,2,2,1,1,2,2,2},
                       {2,2,2,2,2,2,2,2},
                       {2,2,2,2,2,2,2,2}};
+
+
+byte Circle3[8][8] = {{2,2,2,2,2,2,2,2},
+                      {2,2,2,1,1,2,2,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,1,2,2,2,2,1,2},
+                      {2,1,2,2,2,2,1,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,2,2,1,1,2,2,2},
+                      {2,2,2,2,2,2,2,2}};
+
+byte Circle4[8][8] = {{2,2,2,1,1,2,2,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,1,2,2,2,2,1,2},
+                      {1,2,2,2,2,2,2,1},
+                      {1,2,2,2,2,2,2,1},
+                      {2,1,2,2,2,2,1,2},
+                      {2,2,1,2,2,1,2,2},
+                      {2,2,2,1,1,2,2,2}};
+
+
+                      
 
 
 
@@ -209,6 +231,71 @@ void ShowRainBow()
     Screen[lineIndex][7] = 7;
   }
 }
+
+
+
+void ShowCircle1(){  
+  byte lineIndex;
+  byte rowIndex;
+
+  for(lineIndex = 0; lineIndex < 8; lineIndex++)
+  {
+    for(rowIndex = 0; rowIndex < 8; rowIndex++)
+    {
+      Screen[lineIndex][rowIndex] = Circle1[lineIndex][rowIndex];
+    }
+  }
+}
+
+void ShowCircle2(){
+    
+  byte lineIndex;
+  byte rowIndex;
+
+  for(lineIndex = 0; lineIndex < 8; lineIndex++)
+  {
+    for(rowIndex = 0; rowIndex < 8; rowIndex++)
+    {
+      Screen[lineIndex][rowIndex] = Circle2[lineIndex][rowIndex];
+    }
+  }
+}
+
+void ShowCircle3(){
+    
+  byte lineIndex;
+  byte rowIndex;
+
+  for(lineIndex = 0; lineIndex < 8; lineIndex++)
+  {
+    for(rowIndex = 0; rowIndex < 8; rowIndex++)
+    {
+      Screen[lineIndex][rowIndex] = Circle3[lineIndex][rowIndex];
+    }
+  }
+}
+
+void ShowCircle4(){
+    
+  byte lineIndex;
+  byte rowIndex;
+
+  for(lineIndex = 0; lineIndex < 8; lineIndex++)
+  {
+    for(rowIndex = 0; rowIndex < 8; rowIndex++)
+    {
+      Screen[lineIndex][rowIndex] = Circle4[lineIndex][rowIndex];
+    }
+  }
+}
+
+
+
+
+
+
+
+
 
 void ShowFartyFace()
 {  
@@ -379,6 +466,46 @@ void BlinkingState()
 }
 
 
+//Animates the Circle Animation
+void AnimateCircle()
+{
+  State++;
+  if (State == 5)
+  {
+    State = 0;
+  }
+
+  LastStateChangeTime = millis();
+  switch (State)
+  {
+
+     case 1:
+       ShowCircle1();
+       StateWaitTime = 60;
+       break;
+     case 2:
+       ShowCircle2();
+       StateWaitTime = 60;
+       break;
+     case 3:
+       ShowCircle3();
+       StateWaitTime = 60;
+       break;
+     case 4:
+       ShowCircle4();
+       StateWaitTime = 60;
+       break;   
+
+  }
+}
+
+
+
+
+
+
+
+
 
 void setup() 
 {
@@ -466,7 +593,11 @@ void loop() {
 //Serial.print("Loop");
  //   UpdateState();
  //BlinkingState();
-   ShowPicture();
+ //  ShowPicture();
+
+ AnimateCircle();
+
+ //ShowCircle2();
    
   }  
   
